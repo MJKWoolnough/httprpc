@@ -10,9 +10,10 @@ type httpRPC struct {
 	server      *rpc.Server
 	serverCodec func(io.ReadWriteCloser) rpc.ServerCodec
 	readLimit   int64
+	contentType string
 }
 
-func Handle(server *rpc.Server, serverCodec func(io.ReadWriteCloser) rpc.ServerCodec, readLimit int64) http.Handler {
+func Handle(server *rpc.Server, serverCodec func(io.ReadWriteCloser) rpc.ServerCodec, readLimit int64, contentType string) http.Handler {
 	if server == nil {
 		server = rpc.DefaultServer
 	}
@@ -20,6 +21,7 @@ func Handle(server *rpc.Server, serverCodec func(io.ReadWriteCloser) rpc.ServerC
 		server:      server,
 		serverCodec: serverCodec,
 		readLimit:   readLimit,
+		contentType: contentType,
 	}
 }
 
@@ -30,6 +32,9 @@ type conn struct {
 }
 
 func (h httpRPC) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if h.contentType != "" {
+		w.Header().Set("Content-Type", h.contentType)
+	}
 	c := conn{
 		Reader: r.Body,
 		Closer: r.Body,
