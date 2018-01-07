@@ -1,3 +1,4 @@
+// Package httprpc creates an HTTP endpoint that wraps an RPC server
 package httprpc
 
 import (
@@ -13,6 +14,7 @@ type httpRPC struct {
 	contentType string
 }
 
+// Handle returns a new http.Handler that wraps an RPC server
 func Handle(server *rpc.Server, serverCodec func(io.ReadWriteCloser) rpc.ServerCodec, readLimit int64, contentType string) http.Handler {
 	if server == nil {
 		server = rpc.DefaultServer
