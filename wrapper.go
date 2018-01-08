@@ -19,7 +19,7 @@ func (w *wrapper) ReadRequestHeader(r *rpc.Request) error {
 }
 
 func (w *wrapper) WriteResponse(r *rpc.Response, i interface{}) error {
-	err := w.WriteResponse(r, i)
+	err := w.ServerCodec.WriteResponse(r, i)
 	w.wg.Done()
 	return err
 }
