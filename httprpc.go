@@ -1,4 +1,4 @@
-// Package httprpc creates an HTTP endpoint that wraps an RPC server
+// Package httprpc creates an HTTP POST endpoint that wraps an RPC server
 package httprpc
 
 import (
