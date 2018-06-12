@@ -1,5 +1,5 @@
 // Package httprpc creates an HTTP POST endpoint that wraps an RPC server
-package httprpc
+package httprpc // import "vimagination.zapto.org/httprpc"
 
 import (
 	"io"
