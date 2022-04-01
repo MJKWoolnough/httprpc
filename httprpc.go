@@ -45,7 +45,5 @@ func (h httpRPC) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if h.readLimit > 0 {
 		c.Reader = io.LimitReader(r.Body, h.readLimit)
 	}
-	h.server.ServeCodec(&wrapper{
-		ServerCodec: h.serverCodec(&c),
-	})
+	h.server.ServeCodec(h.serverCodec(&c))
 }
