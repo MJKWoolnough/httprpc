@@ -1,6 +1,6 @@
 # httprpc
 --
-    import "github.com/MJKWoolnough/httprpc"
+    import "vimagination.zapto.org/httprpc"
 
 Package httprpc creates an HTTP POST endpoint that wraps an RPC server
 
