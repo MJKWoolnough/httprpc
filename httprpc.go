@@ -1,4 +1,4 @@
-// Package httprpc creates an HTTP POST endpoint that wraps an RPC server
+// Package httprpc creates an HTTP POST endpoint that wraps an RPC server.
 package httprpc // import "vimagination.zapto.org/httprpc"
 
 import (
@@ -14,11 +14,12 @@ type httpRPC struct {
 	contentType string
 }
 
-// Handle returns a new http.Handler that wraps an RPC server
+// Handle returns a new http.Handler that wraps an RPC server.
 func Handle(server *rpc.Server, serverCodec func(io.ReadWriteCloser) rpc.ServerCodec, readLimit int64, contentType string) http.Handler {
 	if server == nil {
 		server = rpc.DefaultServer
 	}
+
 	return httpRPC{
 		server:      server,
 		serverCodec: serverCodec,
@@ -37,13 +38,16 @@ func (h httpRPC) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if h.contentType != "" {
 		w.Header().Set("Content-Type", h.contentType)
 	}
+
 	c := conn{
 		Reader: r.Body,
 		Closer: r.Body,
 		Writer: w,
 	}
+
 	if h.readLimit > 0 {
 		c.Reader = io.LimitReader(r.Body, h.readLimit)
 	}
+
 	h.server.ServeCodec(h.serverCodec(&c))
 }
