@@ -2,7 +2,7 @@
 --
     import "vimagination.zapto.org/httprpc"
 
-Package httprpc creates an HTTP POST endpoint that wraps an RPC server
+Package httprpc creates an HTTP POST endpoint that wraps an RPC server.
 
 ## Usage
 
@@ -11,4 +11,4 @@ Package httprpc creates an HTTP POST endpoint that wraps an RPC server
 ```go
 func Handle(server *rpc.Server, serverCodec func(io.ReadWriteCloser) rpc.ServerCodec, readLimit int64, contentType string) http.Handler
 ```
-Handle returns a new http.Handler that wraps an RPC server
+Handle returns a new http.Handler that wraps an RPC server.
