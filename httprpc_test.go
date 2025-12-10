@@ -14,13 +14,17 @@ type RPCT struct{}
 
 func (RPCT) TrimSpace(str string, s *string) error {
 	*s = strings.TrimSpace(str)
+
 	return nil
 }
 
 func TestRPC(t *testing.T) {
 	rpc.Register(RPCT{})
+
 	srv := httptest.NewServer(Handle(nil, jsonrpc.NewServerCodec, 0, "application/json; charset=utf-8"))
+
 	var buf bytes.Buffer
+
 	for n, test := range []struct {
 		Input, Output string
 	}{
@@ -38,12 +42,16 @@ func TestRPC(t *testing.T) {
 		},
 	} {
 		resp, _ := srv.Client().Post(srv.URL+"/", "application/json", strings.NewReader(test.Input))
+
 		io.Copy(&buf, resp.Body)
 		resp.Body.Close()
+
 		if str := buf.String(); str != test.Output {
 			t.Errorf("test %d: expecting %q, got %q", n+1, test.Output, str)
 		}
+
 		buf.Reset()
 	}
+
 	srv.Close()
 }
