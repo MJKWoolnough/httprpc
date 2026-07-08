@@ -2,7 +2,6 @@
 
 [![CI](https://github.com/MJKWoolnough/httprpc/actions/workflows/go-checks.yml/badge.svg)](https://github.com/MJKWoolnough/httprpc/actions)
 [![Go Reference](https://pkg.go.dev/badge/vimagination.zapto.org/httprpc.svg)](https://pkg.go.dev/vimagination.zapto.org/httprpc)
-[![Go Report Card](https://goreportcard.com/badge/vimagination.zapto.org/httprpc)](https://goreportcard.com/report/vimagination.zapto.org/httprpc)
 
 --
     import "vimagination.zapto.org/httprpc"
